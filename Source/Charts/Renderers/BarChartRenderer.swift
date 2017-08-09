@@ -466,6 +466,20 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                 y: py,
                                 size: icon.size)
                         }
+                        
+                        //Draw small view for zero values if enabled
+                        if dataSet.isDrawZeroIconEnabled && val == 0.0 {
+                            let view = UIView(frame: CGRect(x: 0, y: 0, width: rect.size.width, height: 2))
+                            view.backgroundColor = dataSet.zeroValueColor
+                            let zeroIcon:UIImage = (view.snapshot ?? nil)!
+                            
+                            ChartUtils.drawImage(
+                                context: context,
+                                image: zeroIcon,
+                                x: x,
+                                y: rect.origin.y,
+                                size: zeroIcon.size)
+                        }
                     }
                 }
                 else
@@ -701,5 +715,18 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     internal func setHighlightDrawPos(highlight high: Highlight, barRect: CGRect)
     {
         high.setDraw(x: barRect.midX, y: barRect.origin.y)
+    }
+}
+
+extension UIView {
+    var snapshot: UIImage? {
+        UIGraphicsBeginImageContext(self.frame.size)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        layer.render(in: context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }

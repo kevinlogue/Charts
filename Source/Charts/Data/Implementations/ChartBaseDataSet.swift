@@ -327,6 +327,8 @@ open class ChartBaseDataSet: NSObject, IChartDataSet
     /// the font for the value-text labels
     open var valueFont: NSUIFont = NSUIFont.systemFont(ofSize: 7.0)
     
+    open var zeroValueColor: UIColor = UIColor(red:0.35, green:0.35, blue:0.35, alpha:1.0)
+    
     /// The form to draw for this dataset in the legend.
     open var form = Legend.Form.default
     
@@ -372,6 +374,11 @@ open class ChartBaseDataSet: NSObject, IChartDataSet
     open var isDrawIconsEnabled: Bool
     {
         return drawIconsEnabled
+    }
+    
+    open var drawZeroIconEnabled = true
+    open var isDrawZeroIconEnabled: Bool {
+        return drawZeroIconEnabled
     }
     
     /// Offset of icons drawn on the chart.  

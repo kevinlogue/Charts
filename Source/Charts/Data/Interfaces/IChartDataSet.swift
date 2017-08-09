@@ -202,6 +202,8 @@ public protocol IChartDataSet
     /// the font for the value-text labels
     var valueFont: NSUIFont { get set }
     
+    var zeroValueColor: UIColor { get set }
+    
     /// The form to draw for this dataset in the legend.
     ///
     /// Return `.Default` to use the default legend form.
@@ -244,6 +246,9 @@ public protocol IChartDataSet
     
     /// Returns true if y-icon drawing is enabled, false if not
     var isDrawIconsEnabled: Bool { get }
+    
+    var drawZeroIconEnabled: Bool { get set }
+    var isDrawZeroIconEnabled: Bool { get }
     
     /// Offset of icons drawn on the chart.
     ///
